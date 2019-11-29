@@ -1,0 +1,163 @@
+/* Themis Garcia - Sketch for reading Blocks in and use it in P5 App
+ *  ARDUINO TO P5 Ascii // Sequences of RFID Tags readings
+
+ */
+ 
+#include <SPI.h>
+#include <MFRC522.h>
+ 
+#define SS_PIN 10
+#define RST_PIN 9
+MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance.
+ 
+void setup() 
+{
+  Serial.begin(9600);   // Initiate a serial communication
+  SPI.begin();      // Initiate  SPI bus
+  mfrc522.PCD_Init();   // Initiate MFRC522
+}
+
+void loop() 
+{
+  // Look for new cards
+  if ( ! mfrc522.PICC_IsNewCardPresent()) 
+  {
+    return;
+  }
+  // Select one of the cards
+  if ( ! mfrc522.PICC_ReadCardSerial()) 
+  {
+    return;
+  }
+  
+  String content= "";
+  byte letter;
+  for (byte i = 0; i < mfrc522.uid.size; i++) 
+  {
+     content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
+     content.concat(String(mfrc522.uid.uidByte[i], HEX));
+  }
+  content.toUpperCase();
+  if (content.substring(1) == "49 EB 11 D9") //change here the UID of the card/cards that you want to give access
+  {
+    //Serial.println("TAG_1");
+    int valueToSend = 1;
+    Serial.println(valueToSend);
+    delay(1000);
+  }
+ 
+ else  if  (content.substring(1) == "39 FD 11 D9")  {
+    //Serial.println("TAG_2");
+    int valueToSend = 2;
+    Serial.println(valueToSend);
+    
+    delay(1000);
+  }
+
+ else  if  (content.substring(1) == "89 70 12 D9")  {
+    //Serial.println("TAG_3");
+    int valueToSend = 3;
+    Serial.println(valueToSend);
+    
+    delay(1000);
+  }
+
+
+ else  if  (content.substring(1) == "59 8A 12 D9")  {
+    //Serial.println("TAG_4");
+    int valueToSend = 4;
+    Serial.println(valueToSend);
+    
+    delay(1000);
+  }
+
+  
+ else  if  (content.substring(1) == "C9 F7 12 D9")  {
+    //Serial.println("TAG_5");
+    int valueToSend = 5;
+    Serial.println(valueToSend);
+    
+    delay(1000);
+  }
+
+ else  if  (content.substring(1) == "C9 59 20 D9")  {
+    //Serial.println("TAG_6");
+    int valueToSend = 6;
+    Serial.println(valueToSend);
+    
+    delay(1000);
+  }
+
+   else  if  (content.substring(1) == "D9 BA 20 D9")  {
+    //Serial.println("TAG_7");
+    int valueToSend = 7;
+    Serial.println(valueToSend);
+    
+    delay(1000);
+  }
+
+  else  if  (content.substring(1) == "59 DD 20 D9")  {
+    //Serial.println("TAG_8");
+    int valueToSend = 8;
+    Serial.println(valueToSend);
+    
+    delay(1000);
+  }
+
+  else  if  (content.substring(1) == "19 DB 20 D9")  {
+    //Serial.println("TAG_9");
+    int valueToSend = 9;
+    Serial.println(valueToSend);
+    
+    delay(1000);
+  }
+
+  else  if  (content.substring(1) == "19 56 20 D9")  {
+    //Serial.println("TAG_10");
+    int valueToSend = 10;
+    Serial.println(valueToSend);
+    
+    delay(1000);
+  }
+
+else  if  (content.substring(1) == "E9 BA 20 D9")  {
+    //Serial.println("TAG_11");
+    int valueToSend = 11;
+    Serial.println(valueToSend);
+    
+    delay(1000);
+  }
+
+   else  if  (content.substring(1) == "D9 59 20 D9")  {
+    //Serial.println("TAG_12");
+    int valueToSend = 12;
+    Serial.println(valueToSend);
+    
+    delay(1000);
+  }
+
+  else  if  (content.substring(1) == "B9 37 20 D9")  {
+    //Serial.println("TAG_13");
+    int valueToSend = 13;
+    Serial.println(valueToSend);
+    
+    delay(1000);
+  }
+
+  else  if  (content.substring(1) == "99 DA 1F D9")  {
+    //Serial.println("TAG_14");
+    int valueToSend = 14;
+    Serial.println(valueToSend);
+    
+    delay(1000);
+  }
+
+  else  if  (content.substring(1) == "D9 33 20 D9")  {
+    //Serial.println("TAG_15");
+    int valueToSend = 15;
+    Serial.println(valueToSend);
+    
+    delay(1000);
+  }
+
+} 
